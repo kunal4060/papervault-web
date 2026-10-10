@@ -10,7 +10,6 @@
  */
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import Navbar from "../components/Navbar.jsx";
 import { useAuth } from "../hooks/useAuth.js";
@@ -58,13 +57,13 @@ function RequestCard({ req, subject, hasUpvoted, canUpvote, onUpvote, onLogin })
   const fulfilled = !!req.fulfilledBy;
 
   return (
-    <article className="metallic-card rounded-2xl p-4 lg:p-5">
+    <article className="rounded-xl border border-hairline bg-surface p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-dim hover:shadow-[0_12px_32px_-12px_rgba(0,0,0,0.6)] lg:rounded-2xl lg:p-5">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="font-mono text-[13px] font-bold text-white">
+          <p className="font-mono text-[13px] font-semibold text-accent">
             {subject?.code ?? "—"}
           </p>
-          <h3 className="mt-0.5 truncate text-[15px] font-semibold text-white">
+          <h3 className="mt-0.5 truncate text-[15px] font-semibold text-text">
             {subject?.name ?? "Unknown subject"}
           </h3>
         </div>
@@ -74,7 +73,7 @@ function RequestCard({ req, subject, hasUpvoted, canUpvote, onUpvote, onLogin })
             Available
           </span>
         ) : (
-          <span className="inline-flex shrink-0 rounded-full border border-hairline bg-surface-plus px-3 py-1 font-mono text-[11px] font-semibold text-text-muted">
+          <span className="inline-flex shrink-0 rounded-full border border-hairline px-3 py-1 font-mono text-[11px] font-semibold text-text-dim">
             {req.examType} · {req.year}
           </span>
         )}
@@ -86,9 +85,9 @@ function RequestCard({ req, subject, hasUpvoted, canUpvote, onUpvote, onLogin })
         </p>
       )}
 
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-hairline pt-3.5">
+      <div className="mt-3 flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <p className="font-display text-xl font-bold text-white">
+          <p className="font-display text-xl font-bold text-text">
             {count}{" "}
             <span className="text-sm font-medium text-text-dim">
               student{count === 1 ? "" : "s"} want{count === 1 ? "s" : ""} this
@@ -98,21 +97,21 @@ function RequestCard({ req, subject, hasUpvoted, canUpvote, onUpvote, onLogin })
         </div>
 
         {fulfilled ? (
-          <Link
-            to="/papers"
-            className="metallic-button-secondary inline-flex min-h-[42px] shrink-0 items-center gap-2 rounded-xl px-4 text-sm font-semibold transition-all hover:text-moss"
+          <a
+            href="#papers"
+            className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-lg border border-hairline px-4 text-sm font-semibold text-text transition-colors hover:border-moss/60 hover:text-moss"
           >
             <Icon name="file" size={15} />
             View paper
-          </Link>
+          </a>
         ) : (
           <button
             onClick={() => (canUpvote ? onUpvote(req.id) : onLogin())}
             disabled={hasUpvoted}
-            className={`inline-flex min-h-[42px] shrink-0 items-center gap-2 rounded-xl px-4 text-sm font-bold transition-all ${
+            className={`inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-lg px-4 text-sm font-semibold transition-colors ${
               hasUpvoted
-                ? "border border-hairline-bright bg-surface-plus text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
-                : "metallic-button text-canvas shadow-[0_2px_12px_rgba(255,255,255,0.2)]"
+                ? "border border-accent-dim bg-accent/10 text-accent"
+                : "bg-accent text-canvas hover:opacity-90 disabled:opacity-40"
             }`}
           >
             <Icon name="thumbsup" size={15} />

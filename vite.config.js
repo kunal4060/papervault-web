@@ -5,31 +5,11 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  // GitHub Pages project site: https://kunal4060.github.io/papervault/
+  // GitHub Pages project site: https://kunal4060.github.io/papervault-web/
   base: '/papervault-web/',
   build: {
-    chunkSizeWarningLimit: 800,
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules/three')) {
-            return 'three'
-          }
-          if (id.includes('node_modules/pdfjs-dist')) {
-            return 'pdfjs'
-          }
-          if (id.includes('node_modules/firebase') || id.includes('node_modules/@firebase')) {
-            return 'firebase'
-          }
-          if (
-            id.includes('node_modules/react') ||
-            id.includes('node_modules/react-dom') ||
-            id.includes('node_modules/react-router')
-          ) {
-            return 'vendor'
-          }
-        },
-      },
-    },
+    // firebase SDK is a real (lazy) dependency — bundle stays over the
+    // default 500 kB warning line. TODO: code-split firebase + admin chunks.
+    chunkSizeWarningLimit: 1200,
   },
 })

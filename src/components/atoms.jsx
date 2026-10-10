@@ -16,9 +16,9 @@ const buttonBase = `${minTouch} inline-flex items-center justify-center gap-2 ro
 
 const buttonVariants = {
   primary:
-    "metallic-button font-bold text-[#050505]",
+    "bg-accent text-[#0C0D10] hover:bg-[#FFBE4D]",
   secondary:
-    "metallic-button-secondary font-medium text-text",
+    "bg-transparent border border-hairline text-text hover:border-text-dim hover:bg-surface-plus",
   danger:
     "bg-transparent border border-brick/60 text-brick hover:bg-brick/10",
 };
